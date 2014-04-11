@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Add Bill</title>
+
+</head>
+<body>
+	<div id="titleSpace">
+		<jsp:include page="templates/header.jsp" />
+	</div>
+
+	<!--------------Slideshow--------------->
+
+	<section class="featured"></section>
+
+	<!--------------Content--------------->
+	<section id="content">
+		<div class="zerogrid">
+			<div class="tire-track-container">
+				<div class="row">
+					<div class="main-content">
+						<div class="row">
+							<div class="col-1-3">
+								<section></section>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-2-3">
+								<article>
+
+									<div class="heading"></div>
+
+									<div class="content">
+										<div class="struts_table">
+											<h2>Leave your mark!</h2>
+											<s:form action="addBill.action" method="post">
+												<s:textfield id="serialTextField" label="Serial Number"
+													key="billSerial" />
+												<s:select label="Worth Of Bill"
+													list="#{'5':'5 Euros', '10':'10 Euros', '20':'20 Euros', '50':'50 Euros','100':'100 Euros'}"
+													value="5" required="true" key="billValue" />
+													
+												<s:textarea cols="20" label="Note" name="comment" id="note"
+													key="comment">
+												</s:textarea>
+
+
+												<s:textfield label="Location" key="location" />
+												<s:submit id="addBill_inDB" value="Add Bill" />
+											</s:form>
+										</div>
+									</div>
+								</article>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div id="footerSpace">
+		<jsp:include page="templates/footer.jsp" />
+	</div>
+
+</body>
+</html>

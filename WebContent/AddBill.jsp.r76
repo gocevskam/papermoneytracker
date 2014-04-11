@@ -1,0 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+ <div id="titleSpace">
+	<jsp:include page="templates/header.jsp" />
+</div>
+
+<div class="featured">
+<h2>Leave your mark! </h2>
+<div class ="content">
+
+			<s:form action="">
+			<s:textfield label="Serial Number" key="billSerial"/>
+			<s:select label="Worth Of the Bill" id="worthBill"
+           name="Worth Of the Bill"
+           value="%{'POPEYE'}"
+           list="%{#{'Five Euros':'Five Euros', 'Ten Euros':'Ten Euros','Twenty Euros':'Twenty Euros',
+                      'Fifty Euros':'Fifty Euros','Hundred Euros':'Hundred Euros' }}">
+           </s:select>
+	        <s:textarea cols="20" label="Note" name="note" id="note"  key="comment"> </s:textarea>
+	       
+
+	        <s:textfield label="Location" key="location"/>
+	        <s:submit id="addBill_inDB" value= "Add Bill" />
+			</s:form>
+</div>
+ 
+ </div>
+ 
+ 
+ <div id="footerSpace">
+	<jsp:include page="templates/footer.jsp" />
+</div>
+ 
+</body>
+</html>

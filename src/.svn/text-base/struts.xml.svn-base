@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+	
+	<!-- constants for REST integration -->
+	<constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper" />
+	<constant name="struts.mapper.prefixMapping" value="/rest:restful2,:struts" />
+	<constant name="struts.enable.SlashesInActionNames" value="true" />
+	<constant name="struts.mapper.alwaysSelectFullNamespace" value="false" />
+	
+	<package name="userActions" extends="struts-default">
+		<interceptors>
+			<interceptor name="authenticationInterceptor" class="com.papermoneytracker.struts2.interceptor.AuthenticationInterceptor" />
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authenticationInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+	
+		<action name="login" class="com.papermoneytracker.struts2.LoginAction" method="execute">
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/index.jsp</result>
+			<result name="input">/index.jsp</result>
+		</action>
+		
+		<action name="logout" class="com.papermoneytracker.struts2.LogoutAction" method="execute">
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/index.jsp</result>
+		</action>
+		
+		<action name="register" class="com.papermoneytracker.struts2.RegistrationAction" method="execute">
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/index.jsp</result>
+			<result name="input">/register.jsp</result>
+		</action>
+		
+		<action name="showTrail" class="com.papermoneytracker.struts2.ShowTrailAction" method="execute">
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/trails.jsp</result>
+			<result name="addBill">/AddBill.jsp</result>
+			<result name="addTracking">/WEB-INF/AddToTrack.jsp</result>
+		</action>
+				
+		<action name="addTracking" class="com.papermoneytracker.struts2.AddTrackingAction" method="execute">
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/trails.jsp</result>
+			<result name="input">/WEB-INF/AddToTrack.jsp</result>
+		</action>
+		
+		<action name="addBill" class="com.papermoneytracker.struts2.AddBillAction" method="execute">
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/trails.jsp</result>
+			<result name="input">/AddBill.jsp</result>
+		</action>
+		
+		<action name="ajaxBillSerialDBCheck" class="com.papermoneytracker.struts2.AjaxAction" method="execute">
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/ajaxTracked.jsp</result>
+			<result name="input">/ajaxNotTracked.jsp</result>
+		</action>
+		
+		<action name="ajaxGetValueFromDB" class="com.papermoneytracker.struts2.AjaxAction" method="execute">
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/ajaxValue.jsp</result>
+			<result name="input">/ajaxValue.jsp</result>
+		</action>
+		
+		<action name="ajaxGetTop3AndRandom" class="com.papermoneytracker.struts2.AjaxAction" method="top3">
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/ajaxComments.jsp</result>
+		</action>
+		
+		<action name="ajaxVoteForTracking" class="com.papermoneytracker.struts2.AjaxAction" method="vote">
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/ajaxPureValue.jsp</result>
+		</action>
+		<action name="updateUser" class="com.papermoneytracker.struts2.UpdateProfileAction" method="execute">
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/index.jsp</result>
+			<result name="input">/UserProfile.jsp</result>
+		</action>
+		
+		<action name="showAllTrackings" class="com.papermoneytracker.struts2.ShowTrailAction" method="executeAll">
+			<interceptor-ref name="defaultStack" />
+			<result name="success">/trailsOverview.jsp</result>
+		</action>
+		
+		<action name="lookupCurrency" class="com.papermoneytracker.struts2.CurrencyAction" method="execute">
+		    <interceptor-ref name="defaultStack" />
+		    <result name="success">/currencyResult.jsp</result>
+		</action>
+		
+	</package>
+
+	<package name="json-default" extends="struts-default">
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+		</result-types>
+		<interceptors>
+			<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor" />
+		</interceptors>
+	</package>
+
+	<package name="rest" namespace="/rest" extends="json-default">
+    	<action name="trail/*" class="com.papermoneytracker.struts2.RESTTrailAction">
+        	<param name="serial">{1}</param>
+        	<result name="success" type="json" />
+		</action>
+		<action name="tracking/*" class="com.papermoneytracker.struts2.RESTTrackingAction">
+        	<param name="trackingID">{1}</param>
+        	<result name="success" type="json" />
+		</action>
+	</package>
+	
+	<package name="trackingGrid" extends="struts-default,json-default">
+		<action name="edit-grid-entry" class="com.papermoneytracker.struts2.EditGridEntry" method="getJSON">
+			<result name="success" type="json" />
+		</action>
+		<action name="json-table" class="com.papermoneytracker.struts2.JsonTable" method="getJSON">
+			<result name="success" type="json" />
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/131/papermoneytracker/src/com/papermoneytracker/hibernate/DAO
+END
+TrailDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/96/papermoneytracker/src/com/papermoneytracker/hibernate/DAO/TrailDAO.java
+END
+TrackingDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/131/papermoneytracker/src/com/papermoneytracker/hibernate/DAO/TrackingDAO.java
+END
+MoneyUserDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/54/papermoneytracker/src/com/papermoneytracker/hibernate/DAO/MoneyUserDAO.java
+END

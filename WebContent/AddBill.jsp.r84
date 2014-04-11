@@ -1,0 +1,60 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="titleSpace">
+		<jsp:include page="templates/header.jsp" />
+	</div>
+
+	<div class="featured">
+		<h2>Leave your mark!</h2>
+		<div class="content">
+
+			<s:form action="addBill.action" method="post">
+				<s:textfield id="serialTextField" label="Serial Number"	key="billSerial" />
+				<tr><td class="tdLabel"><img id="flag" /></td>
+				<td class="tdLabel"><label id="flagLabel" for="flag" class="label"></label></td></tr>
+				<tr>
+					<td class="tdLabel">
+						<label id="valueLabel" for="value" class="label">Bill Value: </label>
+					</td>
+					<td class="tdLabel">
+						<div id="values">
+							<img id="5" src="images/bills/5.png" onmouseover="over(this)" onmouseout="out(this)" onclick="clickk(this)" />
+							<img id="10" src="images/bills/10.png" onmouseover="over(this)" onmouseout="out(this)" onclick="clickk(this)" />
+							<img id="20" src="images/bills/20.png" onmouseover="over(this)" onmouseout="out(this)" onclick="clickk(this)" />
+							<img id="50" src="images/bills/50.png" onmouseover="over(this)" onmouseout="out(this)" onclick="clickk(this)" />
+							<img id="100" src="images/bills/100.png" onmouseover="over(this)" onmouseout="out(this)" onclick="clickk(this)" />
+							<img id="200" src="images/bills/200.png" onmouseover="over(this)" onmouseout="out(this)" onclick="clickk(this)" />
+							<img id="500" src="images/bills/500.png" onmouseover="over(this)" onmouseout="out(this)" onclick="clickk(this)" />
+							<input id="value" name="billValue" />
+						</div>
+					</td>
+				</tr>
+				
+				<s:textfield id="location" label="Location" key="location" />
+				<s:textarea cols="20" label="How did you get the bill, where did you find it?" name="comment" id="note"
+					key="comment">
+				</s:textarea>
+				<s:submit id="addBill_inDB" value="Add Bill" />
+			</s:form>
+		</div>
+
+	</div>
+
+	<div id="footerSpace">
+		<jsp:include page="templates/footer.jsp" />
+	</div>
+
+	<script src="js/validation-serial2.js">
+		
+	</script>
+
+</body>
+</html>
